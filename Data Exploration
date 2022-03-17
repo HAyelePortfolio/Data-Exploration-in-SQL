@@ -1,28 +1,25 @@
 
-
--- Covid 19 Data Exploration
+/*
+Covid 19 Data Exploration 
+Skills used: Joins, CTE's, Temp Tables, Windows Functions, Aggregate Functions, Creating Views, Converting Data Types
+*/
 
 Select *
 From portfolioproject..CovidDeaths
 Where continent IS NOT NULL;
 
 
-Select *
-From portfolioproject..CovidVaccinations
-
-
--- New cases, total cases and total_deaths in each country
+-- Select Data that we are going to be starting with
 
 Select  location, 
-		date, 
-		total_cases, 
-		new_cases, 
-		total_deaths, 
-		population
-From portfolioproject..CovidDeaths
-Where continent IS NOT NULL
-order by 1, 2;
-
+	date, 
+	total_cases, 
+	new_cases, 
+	total_deaths, 
+	population
+From PortfolioProject..CovidDeaths
+Where continent is not null 
+order by 1,2
 
 
 
@@ -42,7 +39,7 @@ order by 1, 2;
 
 
 -- Total cases VS Total deaths in percentage, in the UK
--- The likelihood of dying if you contract the covid in the UK
+-- The likelihood of dying if you contract covid in the UK
 
 Select  location, 
 		date, 
@@ -59,7 +56,7 @@ order by 1, 2;
 
 
 -- Total cases VS Population
--- The percentage of population infected by covid
+-- Shows the percentage of population infected by covid
 
 Select  location, 
 		date, 
@@ -74,7 +71,7 @@ order by 1, 2;
 
 
 
--- Countries with highest infection rate compared to population size
+-- Shows Countries with highest infection rate compared to population size
 
 Select  location, 
 		population,
@@ -88,7 +85,7 @@ order by case_vs_population_percentage DESC, highest_infection_rate DESC;
 
 
 
--- Countries with highest death rate compared to population size
+-- Shows Countries with highest death rate compared to population size
 
 Select  location, 
 		population,
@@ -126,6 +123,7 @@ From portfolioproject..CovidDeaths
 where continent IS NOT NULL;
 
 
+
 -- Global numbers per date
 
 Select  date,		
@@ -141,6 +139,7 @@ order by date;
 
 
 -- Total Population Vs vaccination 
+-- Shows Percentage of Population that has recieved at least one Covid Vaccine
 
 Select  d.continent,
 		d.location,
@@ -213,6 +212,7 @@ SELECT  *,
 		(rolling_count_total_vaccination/population)*100 AS population_vs_vaccination
 From rolling_count
 Order by 2, 3; 
+
 
 
 
